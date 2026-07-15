@@ -1,0 +1,6 @@
+{
+  "name": "Agentic OS",
+  "description": "An AI-powered agentic OS controller that automates complex workflows across multiple platforms using natural language commands.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

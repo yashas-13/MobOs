@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Cyber Terminal Console Core Icon (66dp centered in 108dp) -->
+    <!-- Centered Box Border (Cyan Glow) -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M31,31 h46 v46 h-46 z"
+        android:strokeWidth="3"
+        android:strokeColor="#00E5FF" />
+    <!-- Terminal Prompt Logo (>) inside box -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M43,44 L53,54 L43,64"
+        android:strokeWidth="4.5"
+        android:strokeColor="#26FF3F"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <!-- Cursor Blinker (_) next to prompt -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M56,64 h8"
+        android:strokeWidth="4.5"
+        android:strokeColor="#00E5FF"
+        android:strokeLineCap="round" />
+</vector>
