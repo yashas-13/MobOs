@@ -1,21 +1,84 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# MobOs — AgentOS for Android
 
-# Run and deploy your AI Studio app
+**Stop prompting. Start delegating.**
 
-This contains everything you need to run your app locally.
+MobOs is evolving into a mobile-first AgentOS control plane: an Android application that turns natural-language intent into a permission-aware plan, delegates work to capabilities/agents, observes execution, and verifies the result.
 
-View your app in AI Studio: https://ai.studio/apps/f3c4a285-0921-4b39-9ce0-865bfb98a246
+## Core loop
 
-## Run Locally
+```text
+Intent → Inspect → Plan → Skills → Approval → Execute → Observe → Verify → Learn
+```
 
-**Prerequisites:**  [Android Studio](https://developer.android.com/studio)
+## Architecture
 
+```text
+Android APK
+├── Intent / Console UI
+├── Agent planner
+├── Skills runtime
+├── Capability registry
+├── Permission / approval policy
+├── Execution timeline
+├── Project memory
+└── Verification / Journeys
+       │
+       ├── Android / ADB
+       ├── Termux bridge
+       ├── Git / GitHub
+       ├── Browser bridge
+       └── Remote workstation bridge
+```
 
-1. Open Android Studio
-2. Select **Open** and choose the directory containing this project
-3. Allow Android Studio to fix any incompatibilities as it imports the project.
-4. Create a file named `.env` in the project directory and set `GEMINI_API_KEY` in that file to your Gemini API key (see `.env.example` for an example)
-5. Remove this line from the app's `build.gradle.kts` file: `signingConfig = signingConfigs.getByName("debugConfig")`
-6. Run the app on an emulator or physical device
+The Android application remains the **control plane**. Privileged shell, remote, browser, and device operations are exposed through explicit capability bridges instead of being hidden inside the UI.
+
+## Current engineering baseline
+
+The project uses a pinned version catalog and a dated compatibility snapshot. Current verified sources include:
+
+- Android Gradle Plugin 9.1.1
+- JDK 17
+- compileSdk / targetSdk 37
+- Kotlin 2.4.10
+- KSP 2.3.10
+- Compose BOM 2026.06.00
+- Activity 1.13.0
+- Lifecycle 2.11.0
+- Navigation 2.9.8
+- Room 2.8.4
+- CameraX 1.6.1
+- WorkManager 2.11.2
+
+Versions are intentionally pinned; the project does **not** use dynamic Gradle versions.
+
+## Agent Skills
+
+AgentOS follows the Agent Skills directory model. Android-specific instructions live under `.agent/skills/agentos-android/` and can reference scripts, documentation, and other resources.
+
+The runtime is designed to consume current official Android Skills rather than freezing a copied snapshot of Google's documentation.
+
+## Build
+
+The repository includes a GitHub Actions pipeline that builds the debug APK with JDK 17, Android API 37, and Gradle 9.3.1 and uploads the APK as a workflow artifact.
+
+For local development, open the project in a current Android Studio release and let Gradle resolve the pinned toolchain.
+
+## Product direction
+
+The long-term goal is a system where repeated human workflows can become reusable skills and eventually automations:
+
+```text
+Human workflow
+    ↓
+Agent observes
+    ↓
+Skill generated
+    ↓
+Capability permissions declared
+    ↓
+Workflow verified
+    ↓
+Automation
+```
+
+The UI is intentionally designed to make agent execution visually understandable and screen-recordable: **UNDERSTAND → PLAN → EXECUTE → VERIFY → DONE**.
